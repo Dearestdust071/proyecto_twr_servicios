@@ -22,7 +22,7 @@ class Inventario extends Conectar
     {
         $conectar = parent::conexion();
         parent::set_names();
-        $sql = "SELECT * FROM tbl_inventario WHERE id = ?;";
+        $sql = "SELECT * FROM tbl_inventario WHERE inventario_id = ?;";
         $sql = $conectar->prepare($sql);
         $sql->bindValue(1, $inventario_id);
         $sql->execute();
@@ -54,7 +54,7 @@ class Inventario extends Conectar
         $conectar = parent::conexion();
         parent::set_names();
         $sql = "UPDATE `tbl_inventario` SET `nombre`= ?
-        WHERE id = ?;";
+        WHERE inventario_id = ?;";
         $sql = $conectar->prepare($sql);
         $sql->bindValue(1, $nombre);
         $sql->bindValue(2, $inventario_id);
@@ -66,7 +66,7 @@ class Inventario extends Conectar
     {
         $conectar = parent::conexion();
         parent::set_names();
-        $sql = "DELETE FROM `tbl_inventario` WHERE id = ?;";
+        $sql = "DELETE FROM `tbl_inventario` WHERE inventario_id = ?;";
         $sql = $conectar->prepare($sql);
         $sql->bindValue(1, $inventario_id);
         $resultado['estatus'] = $sql->execute();

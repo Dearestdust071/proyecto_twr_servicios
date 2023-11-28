@@ -20,15 +20,18 @@ switch ($_GET["opcion"]) {
     case "Insert":
         $datos = $habitacionservicios->insert_habitacion_servicios($body["id_habitacion"],$body["id_servicios"],$body["estatus"]);
         echo json_encode($datos);
+        echo("Se registro su servicio");
         break;
 
     case "Update":
         $datos = $habitacionservicios->update_habitacion_servicios($body["id_habitacion"],$body["id_servicios"],$body["estatus"],$body["habitacion_servicios_id"]);
         echo json_encode($datos);
+        echo("Se actualizo bien");
         break;
 
     case "Delete":
         $datos = $habitacionservicios->delete_habitacion_servicios($body["habitacion_servicios_id"]);
         echo json_encode($datos);
+        echo("Se Elimino bien");
         break;
 }

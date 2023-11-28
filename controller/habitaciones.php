@@ -19,21 +19,22 @@ switch ($_GET["opcion"]) {
 
     case "Insert":
         $datos = $habitaciones->insert_habitacion($body["nombre"], $body["capacidad"], $body["extencion"], $body["camas"],
-        $body["descripcion"], $body["fecha_inicio"], $body["fecha_fin"], $body["opiniones"], $body["comentarios"],
-        $body["subtotal"], $body["total"], $body["id_tipo_habitacion"]);
+        $body["descripcion"],$body["subtotal"], $body["total"], $body["id_tipo_habitacion"]);
         echo json_encode($datos);
+        echo("Se inserto la habitacion");
         break;
 
     case "Update":
         $datos = $habitaciones->update_habitacion($body["nombre"], $body["capacidad"], $body["extencion"], $body["camas"],
-        $body["descripcion"], $body["fecha_inicio"], $body["fecha_fin"], $body["opiniones"], $body["comentarios"],
-        $body["subtotal"], $body["total"], $body["id_tipo_habitacion"], $body["habitacion_id"]);
+        $body["descripcion"],$body["subtotal"],$body["total"], $body["id_tipo_habitacion"], $body["habitacion_id"]);
         echo json_encode($datos);
+        echo("Se edito la habitacion");
         break;
 
     case "Delete":
         $datos = $habitaciones->delete_habitacion($body["habitacion_id"]);
         echo json_encode($datos);
+        echo("Se elimino la habitacion");
         break;
 
     

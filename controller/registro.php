@@ -37,7 +37,7 @@ switch ($_GET["opcion"]) {
     case "Update":
         $datos = $registros->update_registro($body["nombre"], $body["apellido_paterno"], $body["apellido_materno"], $body["fecha_nacimiento"],
         $body["correo"], $body["telefono"], $body["usuario"], $body["password"], $body["acceso"],
-        $body["estatus"], $body["id_pais"], $body["id_estado"], $body["id_municipio"], $body["id_municipio"]);
+        $body["estatus"], $body["id_pais"], $body["id_estado"], $body["id_municipio"], $body["registro_id"]);
         echo json_encode($datos);
         break;
 

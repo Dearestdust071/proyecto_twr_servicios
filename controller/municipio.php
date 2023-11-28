@@ -18,12 +18,12 @@ switch ($_GET["opcion"]) {
         break;
 
     case "Insert":
-        $datos = $municipio->insert_municipio($body["nombre"],$body["id_estado"]);
+        $datos = $municipio->insert_municipio($body["nombre"],$body["tbl_estado_estado_id"]);
         echo json_encode($datos);
         break;
 
     case "Update":
-        $datos = $municipio->update_municipio($body["nombre"],$body["id_estado"],$body["municipio_id"]);
+        $datos = $municipio->update_municipio($body["nombre"],$body["tbl_estado_estado_id"],$body["municipio_id"]);
         echo json_encode($datos);
         break;
 

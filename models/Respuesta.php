@@ -22,7 +22,11 @@ class Respuesta extends Conectar
     {
         $conectar = parent::conexion();
         parent::set_names();
+<<<<<<< HEAD
         $sql = "SELECT * FROM tbl_respuesta WHERE id = ?;";
+=======
+        $sql = "SELECT * FROM tbl_respuesta WHERE respuesta_id = ?;";
+>>>>>>> 71d1ce6d0c00c0a8995660b413d1632f7ebb5d8c
         $sql = $conectar->prepare($sql);
         $sql->bindValue(1, $respuesta_id);
         $sql->execute();
@@ -53,10 +57,17 @@ class Respuesta extends Conectar
     {
         $conectar = parent::conexion();
         parent::set_names();
+<<<<<<< HEAD
         $sql = "UPDATE `tbl_respuesta` SET `nombre`= ? WHERE id = ?;";
         $sql = $conectar->prepare($sql);
         $sql->bindValue(1, $nombre);
         $sql->bindValue(1, $respuesta_id);
+=======
+        $sql = "UPDATE `tbl_respuesta` SET `nombre`= ? WHERE respuesta_id = ?;";
+        $sql = $conectar->prepare($sql);
+        $sql->bindValue(1, $nombre);
+        $sql->bindValue(2, $respuesta_id);
+>>>>>>> 71d1ce6d0c00c0a8995660b413d1632f7ebb5d8c
         $resultado['estatus'] = $sql->execute();
         return $resultado;
     }
@@ -65,7 +76,11 @@ class Respuesta extends Conectar
     {
         $conectar = parent::conexion();
         parent::set_names();
+<<<<<<< HEAD
         $sql = "DELETE FROM `tbl_respuesta` WHERE id = ?;";
+=======
+        $sql = "DELETE FROM `tbl_respuesta` WHERE respuesta_id = ?;";
+>>>>>>> 71d1ce6d0c00c0a8995660b413d1632f7ebb5d8c
         $sql = $conectar->prepare($sql);
         $sql->bindValue(1, $respuesta_id);
         $resultado['estatus'] = $sql->execute();

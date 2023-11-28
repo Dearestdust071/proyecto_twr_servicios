@@ -28,7 +28,7 @@ switch ($_GET["opcion"]) {
         break;
 
     case "Delete":
-        $datos = $inventario->delete_inventario($body["pais_id"]);
+        $datos = $inventario->delete_inventario($body["inventario_id"]);
         echo json_encode($datos);
         break;    
 }

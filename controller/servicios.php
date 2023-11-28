@@ -13,7 +13,7 @@ switch ($_GET["opcion"]) {
         break;
 
     case "GetId":
-        $datos = $servicios->get_servicios_x_id($body["servicio_id"]);
+        $datos = $servicios->get_servicios_x_id($body["servicios_id"]);
         echo json_encode($datos);
         break;
 
@@ -23,12 +23,12 @@ switch ($_GET["opcion"]) {
         break;
 
     case "Update":
-        $datos = $servicios->update_servicios($body["nombre"], $body["servicio_id"]);
+        $datos = $servicios->update_servicios($body["nombre"], $body["servicios_id"]);
         echo json_encode($datos);
         break;
 
     case "Delete":
-        $datos = $servicios->delete_servicios($body["servicio_id"]);
+        $datos = $servicios->delete_servicios($body["servicios_id"]);
         echo json_encode($datos);
         break;
 }

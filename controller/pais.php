@@ -18,12 +18,12 @@ switch ($_GET["opcion"]) {
         break;
 
     case "Insert":
-        $datos = $pais->insert_pais($body["nombre"]);
+        $datos = $pais->insert_pais($body["nombre"],$body["extencion"]);
         echo json_encode($datos);
         break;
 
     case "Update":
-        $datos = $pais->update_pais($body["nombre"],$body["pais_id"]);
+        $datos = $pais->update_pais($body["nombre"],$body["extencion"],$body["pais_id"]);
         echo json_encode($datos);
         break;
 

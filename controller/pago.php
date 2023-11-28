@@ -33,14 +33,7 @@ switch ($_GET["opcion"]) {
         break; 
         
     case "GetInfoUTR":
-        $datos = $pago->get_info_reservacion_tarjetas($body["correo"], $body["password"]);
+        $datos = $pago->get_info_reservacion_tarjetas();
         echo json_encode($datos);
         break;
-
-
-        default:
-        echo "Elegiste una opcion no valida";
-
-        break;
-
 }

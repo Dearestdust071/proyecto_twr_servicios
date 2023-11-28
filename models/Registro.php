@@ -12,11 +12,11 @@ class Registro extends Conectar
         $Array = [];
         foreach ($resultado as $d) {
             $Array[] = [
-                'id' => (int)$d->id, 'nombre' => $d->nombre,
-                'apellido_paterno' => $d->apellido_paterno, 'apellido_materno' => (int)$d->apellido_materno,
-                'fecha_nacimiento' => (int)$d->fecha_nacimiento,'correo' => (int)$d->correo,
-                'telefono' => (int)$d->telefono,'usuario' => (int)$d->usuario,
-                'password' => (int)$d->password,'acceso' => (int)$d->acceso,'estatus' => (int)$d->estatus,
+                'registro_id' => (int)$d->registro_id, 'nombre' => $d->nombre,
+                'apellido_paterno' => $d->apellido_paterno, 'apellido_materno' => $d->apellido_materno,
+                'fecha_nacimiento' => $d->fecha_nacimiento,'correo' => $d->correo,
+                'telefono' => $d->telefono,'usuario' => $d->usuario,
+                'password' => $d->password,'acceso' => (int)$d->acceso,'estatus' => (int)$d->estatus,
                 'id_pais' => (int)$d->id_pais,'id_estado' => (int)$d->id_estado,'id_municipio' => (int)$d->id_municipio
             ];
         }
@@ -92,14 +92,17 @@ class Registro extends Conectar
     {
         $conectar = parent::conexion();
         parent::set_names();
+<<<<<<< HEAD
         // Cambie el id a registro_id por que solo tenia id
+=======
+>>>>>>> 71d1ce6d0c00c0a8995660b413d1632f7ebb5d8c
         $sql = "SELECT * FROM tbl_registro WHERE registro_id = ?;";
         $sql = $conectar->prepare($sql);
         $sql->bindValue(1, $registro_id);
         $sql->execute();
         $resultado = $sql->fetch(PDO::FETCH_OBJ);
         $Array = $resultado ? [
-            'id' => (int)$resultado->id, 'nombre' => $resultado->nombre,
+            'registro_id' => (int)$resultado->registro_id, 'nombre' => $resultado->nombre,
             'apellido_paterno' => $resultado->apellido_paterno, 'apellido_materno' => $resultado->apellido_materno,
             'fecha_nacimiento' => $resultado->fecha_nacimiento,'correo' => $resultado->correo,
             'telefono' => $resultado->telefono,'usuario' => $resultado->usuario,'password' => $resultado->password,
@@ -156,7 +159,7 @@ class Registro extends Conectar
         parent::set_names();
         $sql = "UPDATE `tbl_registro` SET `nombre`= ?, `apellido_paterno`= ?, `apellido_materno`= ?,`fecha_nacimiento`= ? ,`correo`= ?,
         `telefono`= ? ,`usuario`= ? ,`password`= ? ,`acceso`= ? ,`estatus`= ? ,`id_pais`= ? ,`id_estado`= ?,`id_municipio`= ? 
-        WHERE id = ?;";
+        WHERE registro_id = ?;";
         $sql = $conectar->prepare($sql);
         $sql->bindValue(1, $nombre);
         $sql->bindValue(2, $apellido_paterno);
@@ -180,7 +183,7 @@ class Registro extends Conectar
     {
         $conectar = parent::conexion();
         parent::set_names();
-        $sql = "DELETE FROM `tbl_registro` WHERE id = ?;";
+        $sql = "DELETE FROM `tbl_registro` WHERE registro_id = ?;";
         $sql = $conectar->prepare($sql);
         $sql->bindValue(1, $registro_id);
         $resultado['estatus'] = $sql->execute();

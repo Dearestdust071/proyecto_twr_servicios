@@ -12,23 +12,23 @@ class Servicios extends Conectar
         $Array = [];
         foreach ($resultado as $d) {
             $Array[] = [
-                'servicio_id' => (int)$d->servicio_id, 'nombre' => $d->nombre
+                'servicios_id' => (int)$d->servicios_id, 'nombre' => $d->nombre
             ];
         }
         return $Array;
     }
 
-    public function get_servicios_x_id($servicio_id)
+    public function get_servicios_x_id($servicios_id)
     {
         $conectar = parent::conexion();
         parent::set_names();
-        $sql = "SELECT * FROM tbl_servicios WHERE id = ?;";
+        $sql = "SELECT * FROM tbl_servicios WHERE servicios_id = ?;";
         $sql = $conectar->prepare($sql);
-        $sql->bindValue(1, $servicio_id);
+        $sql->bindValue(1, $servicios_id);
         $sql->execute();
         $resultado = $sql->fetch(PDO::FETCH_OBJ);
         $Array = $resultado ? [
-            'servicio_id' => (int)$resultado->servicio_id, 'nombre' => $resultado->nombre
+            'servicios_id' => (int)$resultado->servicios_id, 'nombre' => $resultado->nombre
         ] : [];
         return $Array;
     }
@@ -49,26 +49,26 @@ class Servicios extends Conectar
         return $resultado;
     }
 
-    public function update_servicios($nombre,$servicio_id)
+    public function update_servicios($nombre,$servicios_id)
     {
         $conectar = parent::conexion();
         parent::set_names();
         $sql = "UPDATE `tbl_servicios` SET `nombre`= ?
-        WHERE id = ?;";
+        WHERE servicios_id = ?;";
         $sql = $conectar->prepare($sql);
         $sql->bindValue(1, $nombre);
-        $sql->bindValue(2, $servicio_id);
+        $sql->bindValue(2, $servicios_id);
         $resultado['estatus'] = $sql->execute();
         return $resultado;
     }
 
-    public function delete_servicios($servicio_id)
+    public function delete_servicios($servicios_id)
     {
         $conectar = parent::conexion();
         parent::set_names();
-        $sql = "DELETE FROM `tbl_servicios` WHERE id = ?;";
+        $sql = "DELETE FROM `tbl_servicios` WHERE servicios_id = ?;";
         $sql = $conectar->prepare($sql);
-        $sql->bindValue(1, $servicio_id);
+        $sql->bindValue(1, $servicios_id);
         $resultado['estatus'] = $sql->execute();
         return $resultado;
     }

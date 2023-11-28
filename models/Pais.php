@@ -12,7 +12,7 @@ class Pais extends Conectar
         $Array = [];
         foreach ($resultado as $d) {
             $Array[] = [
-                'pais_id' => (int)$d->pais_id, 'nombre' => $d->nombre
+                'pais_id' => (int)$d->pais_id, 'nombre' => $d->nombre,'extencion' => $d->extencion
             ];
         }
         return $Array;
@@ -22,25 +22,26 @@ class Pais extends Conectar
     {
         $conectar = parent::conexion();
         parent::set_names();
-        $sql = "SELECT * FROM tbl_pais WHERE id = ?;";
+        $sql = "SELECT * FROM tbl_pais WHERE pais_id = ?;";
         $sql = $conectar->prepare($sql);
         $sql->bindValue(1, $pais_id);
         $sql->execute();
         $resultado = $sql->fetch(PDO::FETCH_OBJ);
         $Array = $resultado ? [
-            'pais_id' => (int)$resultado->pais_id, 'nombre' => $resultado->nombre
+            'pais_id' => (int)$resultado->pais_id, 'nombre' => $resultado->nombre,'extencion' => $resultado->extencion
         ] : [];
         return $Array;
     }
 
-    public function insert_pais($nombre)
+    public function insert_pais($nombre,$extencion)
     {
         $conectar = parent::conexion();
         parent::set_names();
-        $sql = "INSERT INTO `tbl_pais`(`nombre`) 
-        VALUES (?);";
+        $sql = "INSERT INTO `tbl_pais`(`nombre`,`extencion`) 
+        VALUES (?,?);";
         $sql = $conectar->prepare($sql);
         $sql->bindValue(1, $nombre);
+        $sql->bindValue(2, $extencion);
         $resultado['estatus'] =  $sql->execute();
         $lastInserId =  $conectar->lastInsertId();
         if ($lastInserId != "0") {
@@ -49,15 +50,16 @@ class Pais extends Conectar
         return $resultado;
     }
 
-    public function update_pais($nombre,$pais_id)
+    public function update_pais($nombre,$pais_id,$extencion)
     {
         $conectar = parent::conexion();
         parent::set_names();
-        $sql = "UPDATE `tbl_pais` SET `nombre`= ? 
-        WHERE id = ?;";
+        $sql = "UPDATE `tbl_pais` SET `nombre`= ? ,`extencion`= ?
+        WHERE pais_id = ?;";
         $sql = $conectar->prepare($sql);
         $sql->bindValue(1, $nombre);
         $sql->bindValue(2, $pais_id);
+        $sql->bindValue(3, $extencion);
         $resultado['estatus'] = $sql->execute();
         return $resultado;
     }
@@ -66,7 +68,7 @@ class Pais extends Conectar
     {
         $conectar = parent::conexion();
         parent::set_names();
-        $sql = "DELETE FROM `tbl_pais` WHERE id = ?;";
+        $sql = "DELETE FROM `tbl_pais` WHERE pais_id = ?;";
         $sql = $conectar->prepare($sql);
         $sql->bindValue(1, $pais_id);
         $resultado['estatus'] = $sql->execute();
