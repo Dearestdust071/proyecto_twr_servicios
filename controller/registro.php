@@ -17,6 +17,11 @@ switch ($_GET["opcion"]) {
         echo json_encode($datos);
         break;
 
+    case "checkUser":   
+            $datos = $registros->check_user($body["correo"],$body["password"]);
+            echo json_encode($datos);
+            break;
+
     case "GetId":
         $datos = $registros->get_registro_x_id($body["registro_id"]);
         echo json_encode($datos);

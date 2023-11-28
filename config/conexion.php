@@ -31,7 +31,7 @@ class Conectar
     protected function Conexion()
     {
         try {
-            $NAMEDB = 'hotel';
+            $NAMEDB = 'Hotel_p';
             $HOST = 'localhost';
             $USER = 'root'; 
             $PASSWORD = '';
