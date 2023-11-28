@@ -5,15 +5,21 @@ class Habitacion_servicios extends Conectar
     {
         $db = parent::conexion();
         parent::set_names();
-        $sql = "SELECT * FROM tbl_habitacion_servicios;";
+        $sql = "SELECT t1.*,t2.nombre AS Nombre_habitacion,t3.nombre AS Nombre_servicios
+        FROM tbl_habitacion_servicios AS t1
+        JOIN tbl_habitaciones AS t2
+        ON t2.habitacion_id = t1.id_habitacion
+        JOIN tbl_servicios AS t3
+        ON t3.servicios_id = t1.id_servicios;";
         $sql = $db->prepare($sql);
         $sql->execute();
         $resultado = $sql->fetchAll(PDO::FETCH_OBJ);
         $Array = [];
         foreach ($resultado as $d) {
             $Array[] = [
-                'habitacion_servicios_id' => (int)$d->habitacion_servicios_id, 'id_habitacion' => $d->id_habitacion,
-                'id_servicios' => $d->id_servicios,'estatus' => $d->estatus
+                'habitacion_servicios_id' => (int)$d->habitacion_servicios_id, 'id_habitacion' => (int)$d->id_habitacion,
+                'id_servicios' => (int)$d->id_servicios,'estatus' => $d->estatus,'Nombre_habitacion' => $d->Nombre_habitacion,
+                'Nombre_servicios' => $d->Nombre_servicios
             ];
         }
         return $Array;
@@ -23,14 +29,21 @@ class Habitacion_servicios extends Conectar
     {
         $conectar = parent::conexion();
         parent::set_names();
-        $sql = "SELECT * FROM tbl_habitacion_servicios WHERE id = ?;";
+        $sql = "SELECT t1.*,t2.nombre AS Nombre_habitacion,t3.nombre AS Nombre_servicios
+        FROM tbl_habitacion_servicios AS t1
+        JOIN tbl_habitaciones AS t2
+        ON t2.habitacion_id = t1.id_habitacion
+        JOIN tbl_servicios AS t3
+        ON t3.servicios_id = t1.id_servicios
+        WHERE habitacion_servicios_id = ?;";
         $sql = $conectar->prepare($sql);
         $sql->bindValue(1, $habitacion_servicios_id);
         $sql->execute();
         $resultado = $sql->fetch(PDO::FETCH_OBJ);
         $Array = $resultado ? [
-            'habitacion_servicios_id' => (int)$resultado->habitacion_servicios_id, 'id_habitacion' => $resultado->id_habitacion,
-            'id_servicios' => $resultado->id_servicios,'estatus' => $resultado->estatus
+            'habitacion_servicios_id' => (int)$resultado->habitacion_servicios_id, 'id_habitacion' => (int)$resultado->id_habitacion,
+            'id_servicios' => (int)$resultado->id_servicios,'estatus' => $resultado->estatus,'Nombre_habitacion' => $resultado->Nombre_habitacion,
+            'Nombre_servicios' => $resultado->Nombre_servicios
         ] : [];
         return $Array;
     }
@@ -57,8 +70,8 @@ class Habitacion_servicios extends Conectar
     {
         $conectar = parent::conexion();
         parent::set_names();
-        $sql = "UPDATE `tbl_habitacion_servicios` SET `id_habitacion`= ?, SET `id_servicios`= ?, SET `estatus`= ?
-        WHERE id = ?;";
+        $sql = "UPDATE `tbl_habitacion_servicios` SET `id_habitacion`= ?,`id_servicios`= ?,`estatus`= ?
+        WHERE habitacion_servicios_id = ?;";
         $sql = $conectar->prepare($sql);
         $sql->bindValue(1, $id_habitacion);
         $sql->bindValue(2, $id_servicios);
@@ -72,7 +85,7 @@ class Habitacion_servicios extends Conectar
     {
         $conectar = parent::conexion();
         parent::set_names();
-        $sql = "DELETE FROM `tbl_habitacion_servicios` WHERE id = ?;";
+        $sql = "DELETE FROM `tbl_habitacion_servicios` WHERE habitacion_servicios_id = ?;";
         $sql = $conectar->prepare($sql);
         $sql->bindValue(1, $habitacion_servicios_id);
         $resultado['estatus'] = $sql->execute();

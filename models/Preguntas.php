@@ -1,43 +1,43 @@
 <?php
-class Servicios extends Conectar
+class Preguntas extends Conectar
 {
-    public function get_servicios()
+    public function get_preguntas()
     {
         $db = parent::conexion();
         parent::set_names();
-        $sql = "SELECT * FROM tbl_servicios;";
+        $sql = "SELECT * FROM tbl_preguntas;";
         $sql = $db->prepare($sql);
         $sql->execute();
         $resultado = $sql->fetchAll(PDO::FETCH_OBJ);
         $Array = [];
         foreach ($resultado as $d) {
             $Array[] = [
-                'servicios_id' => (int)$d->servicios_id, 'nombre' => $d->nombre
+                'preguntas_id' => (int)$d->preguntas_id, 'nombre' => $d->nombre
             ];
         }
         return $Array;
     }
 
-    public function get_servicios_x_id($servicios_id)
+    public function get_preguntas_x_id($preguntas_id)
     {
         $conectar = parent::conexion();
         parent::set_names();
-        $sql = "SELECT * FROM tbl_servicios WHERE servicios_id = ?;";
+        $sql = "SELECT * FROM tbl_preguntas WHERE preguntas_id = ?;";
         $sql = $conectar->prepare($sql);
-        $sql->bindValue(1, $servicios_id);
+        $sql->bindValue(1, $preguntas_id);
         $sql->execute();
         $resultado = $sql->fetch(PDO::FETCH_OBJ);
         $Array = $resultado ? [
-            'servicios_id' => (int)$resultado->servicios_id, 'nombre' => $resultado->nombre
+            'preguntas_id' => (int)$resultado->preguntas_id, 'nombre' => $resultado->nombre
         ] : [];
         return $Array;
     }
 
-    public function insert_servicios($nombre)
+    public function insert_preguntas($nombre)
     {
         $conectar = parent::conexion();
         parent::set_names();
-        $sql = "INSERT INTO `tbl_servicios`(`nombre`) 
+        $sql = "INSERT INTO `tbl_preguntas`(`nombre`) 
         VALUES (?);";
         $sql = $conectar->prepare($sql);
         $sql->bindValue(1, $nombre);
@@ -49,26 +49,25 @@ class Servicios extends Conectar
         return $resultado;
     }
 
-    public function update_servicios($nombre,$servicios_id)
+    public function update_preguntas($nombre,$preguntas_id)
     {
         $conectar = parent::conexion();
         parent::set_names();
-        $sql = "UPDATE `tbl_servicios` SET `nombre`= ?
-        WHERE servicios_id = ?;";
+        $sql = "UPDATE `tbl_preguntas` SET `nombre`= ? WHERE preguntas_id = ?;";
         $sql = $conectar->prepare($sql);
         $sql->bindValue(1, $nombre);
-        $sql->bindValue(2, $servicios_id);
+        $sql->bindValue(1, $preguntas_id);
         $resultado['estatus'] = $sql->execute();
         return $resultado;
     }
 
-    public function delete_servicios($servicios_id)
+    public function delete_preguntas($preguntas_id)
     {
         $conectar = parent::conexion();
         parent::set_names();
-        $sql = "DELETE FROM `tbl_servicios` WHERE servicios_id = ?;";
+        $sql = "DELETE FROM `tbl_preguntas` WHERE preguntas_id = ?;";
         $sql = $conectar->prepare($sql);
-        $sql->bindValue(1, $servicios_id);
+        $sql->bindValue(1, $preguntas_id);
         $resultado['estatus'] = $sql->execute();
         return $resultado;
     }

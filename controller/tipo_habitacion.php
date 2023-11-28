@@ -18,12 +18,12 @@ switch ($_GET["opcion"]) {
         break;
 
     case "Insert":
-        $datos = $tipo_habitaciones->insert_tipo_habitacion($body["nombre"]);
+        $datos = $tipo_habitaciones->insert_tipo_habitacion($body["nombre"],$body["descripcion"],$body["rango_precios"]);
         echo json_encode($datos);
         break;
 
     case "Update":
-        $datos = $tipo_habitaciones->update_tipo_habitacion($body["nombre"],$body["tipo_habitacion_id"]);
+        $datos = $tipo_habitaciones->update_tipo_habitacion($body["nombre"],$body["descripcion"],$body["rango_precios"],$body["tipo_habitacion_id"]);
         echo json_encode($datos);
         break;
 

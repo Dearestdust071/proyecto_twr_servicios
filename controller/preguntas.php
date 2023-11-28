@@ -1,34 +1,34 @@
 <?php
 require_once("../config/conexion.php");
-require_once("../models/Municipio.php");
-$municipio = new Municipio();
+require_once("../models/Preguntas.php");
+$preguntas = new Preguntas();
  
 $body = json_decode(file_get_contents("php://input"), true);
 
 switch ($_GET["opcion"]) {
 
     case "GetAll":
-        $datos = $municipio->get_municipio();
+        $datos = $preguntas->get_preguntas();
         echo json_encode($datos);
         break;
 
     case "GetId":
-        $datos = $municipio->get_municipio_x_id($body["municipio_id"]);
+        $datos = $preguntas->get_preguntas_x_id($body["preguntas_id"]);
         echo json_encode($datos);
         break;
 
     case "Insert":
-        $datos = $municipio->insert_municipio($body["nombre"],$body["tbl_estado_estado_id"]);
+        $datos = $preguntas->insert_preguntas($body["nombre"]);
         echo json_encode($datos);
         break;
 
     case "Update":
-        $datos = $municipio->update_municipio($body["nombre"],$body["tbl_estado_estado_id"],$body["municipio_id"]);
+        $datos = $preguntas->update_preguntas($body["nombre"],$body["preguntas_id"]);
         echo json_encode($datos);
         break;
 
     case "Delete":
-        $datos = $municipio->delete_municipio($body["municipio_id"]);
+        $datos = $preguntas->delete_preguntas($body["preguntas_id"]);
         echo json_encode($datos);
         break;    
 }

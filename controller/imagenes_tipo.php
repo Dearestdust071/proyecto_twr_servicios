@@ -1,6 +1,6 @@
 <?php
 require_once("../config/conexion.php");
-require_once("../models/Habitaciones.php");
+require_once("../models/Imagenes_tipo.php");
 $imagenes_tipo = new Imagenes_tipo();
  
 $body = json_decode(file_get_contents("php://input"), true);
